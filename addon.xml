@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.Cinput" name="Cinput" version="1.0.4" provider-name="Cinput">
+  <requires>
+	<import addon="script.module.inputstreamhelper" version="0.3.3"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <description lang="en">.</description>
+    <platform>all</platform>
+	<news>
+	</news>
+  </extension>
+</addon>
