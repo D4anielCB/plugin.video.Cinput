@@ -50,23 +50,23 @@ def Download(url="", ref=""):
 	req = Request(url)
 	if ref:
 		req.add_header('referer', ref)
-	#req.add_header('Content-Type', 'video/mp4')
+	req.add_header('Content-Type', 'video/mp4')
 	req.add_header('Accept-Ranges', 'bytes')
-	req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/472.67')
+	req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/248.65')
 	#req.add_header('Content-Range', 'bytes 96242530-962425304/4')
 	sizechunk = 10 * 1024 * 1024
 	totalsize = 0
 	#req.add_header('Range', 'bytes=1000000000-')
-	req.add_header('Range', 'bytes=0-104857600')
+	req.add_header('Range', 'bytes=104857601-209715202')
 	resp = urlopen(req)
 	length = re.compile('ength\: ?(\d+)').findall(str(resp.headers))
-	ST(length)
+	ST(resp.headers)
 	#return
 	#resp2 = urlopen(req)
 	prog=0
 	progress = xbmcgui.DialogProgressBG()
 	progress.create('Loading... '+length[0])
-	with open(file, 'wb') as f:
+	with open(file, 'ab+') as f:
 		while Addon.getSetting("cDownload") == "True":
 			progtotal = int( 100*totalsize/(int(length[0])) )
 			progress.update(progtotal, "")
@@ -132,7 +132,8 @@ if mode == 0:
 elif mode == 1:
 	PlayUrl(name, url)
 elif mode == 2:
-	StartDownload("https://s0.blogspotting.art/web-sources/download/D0821840F1CD04D1/933789/file.mp4", "http://trailers.to")
+	#StartDownload("https://s0.blogspotting.art/web-sources/download/A1767B4A56E1EF57/933789/file.mp4", "http://trailers.to")
+	StartDownload("https://s0.blogspotting.art/web-sources/9FD853F9D67AABFF/933789/Tom+Clancy%27s+Without+Remorse+(2021)+(Trailers.to).mp4", "http://trailers.to")
 	#StartDownload("http://cdn.netcine.biz/html/content/conteudolb4/walker/01leg/01-ALTO.mp4?token=htKgCi5A1dEGZFTUK1fHXQ&expires=1621223898&ip=189.5.231.128", "http://cdn.netcine.info")
 elif mode == 3:
 	StopDownload()

@@ -1,4 +1,19 @@
-[
-    "1602503058"
-]
-<class 'list'>
+Date: Sun, 16 May 2021 23:52:48 GMT
+Content-Type: video/mp4
+Content-Length: 104857602
+Connection: close
+Cache-Control: no-store,no-cache
+Pragma: no-cache
+Content-Range: bytes 104857601-209715202/1602503058
+Accept-Ranges: bytes
+CF-Cache-Status: DYNAMIC
+cf-request-id: 0a1931cea000006055a20af000000001
+Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=7pFtVKkT6%2FzKKu%2Bd9Vhvi9StnDLaEB9ysdLZNA7L8gke0%2B75r6Gttvl1%2FfGPjb9EqCSgjIplcjsrzDizxTaaabejzhXDkYi7VQeoCioUSZTS56EU"}],"group":"cf-nel","max_age":604800}
+NEL: {"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 65088590fac26055-GRU
+alt-svc: h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
+
+
+<class 'http.client.HTTPMessage'>
