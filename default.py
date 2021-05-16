@@ -50,11 +50,19 @@ def Download(url="", ref=""):
 	req = Request(url)
 	if ref:
 		req.add_header('referer', ref)
-	req.add_header('Content-Type', 'video/mp4')
+	#req.add_header('Content-Type', 'video/mp4')
+	req.add_header('Accept-Ranges', 'bytes')
+	req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/472.67')
+	#req.add_header('Content-Range', 'bytes 96242530-962425304/4')
 	sizechunk = 10 * 1024 * 1024
 	totalsize = 0
+	#req.add_header('Range', 'bytes=1000000000-')
+	req.add_header('Range', 'bytes=0-104857600')
 	resp = urlopen(req)
 	length = re.compile('ength\: ?(\d+)').findall(str(resp.headers))
+	ST(length)
+	#return
+	#resp2 = urlopen(req)
 	prog=0
 	progress = xbmcgui.DialogProgressBG()
 	progress.create('Loading... '+length[0])
@@ -66,11 +74,11 @@ def Download(url="", ref=""):
 			chunk = resp.read(sizechunk)
 			if not chunk:
 				Addon.setSetting("cDownload", "False")
+				progress.close()
 				break
 			f.write(chunk)
 			totalsize+=sizechunk
 	progress.close()
-	
 
 def AddDir(name, url, mode, isFolder=True, IsPlayable=False):
 	urlParams = {'name': name, 'url': url, 'mode': mode}
@@ -86,13 +94,15 @@ def PlayUrl(name, url): #1
 	#Download()
 	#url = "https://s0.blogspotting.art/web-sources/9B17BA576A73C731/4059907/demon-slayer-kimetsu-no-yaiba-the-movie-mugen-train-2020|referer=https://trailers.to/"
 	#url = "http://localhost:8080/mac/m3u.m3u8|referer=https://trailers.to/"
-	url = "D:\\Kodi19.0\\portable_data\\addons\\plugin.video.Cinput\\video.mp4"
+	UA = quote_plus("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/677.98")
+	#url = "D:\\Kodi19.0\\portable_data\\addons\\plugin.video.Cinput\\video.mp4"
+	url = "https://s0.blogspotting.art/web-sources/download/FF64E07E2C2DDC97/933789/file.mp4|referer=https://trailers.to/&User-Agent="+UA
 	xbmc.log('--- Playing "{0}". {1}'.format(name, url), 2)
 	listitem = xbmcgui.ListItem(path=url)
-	#listitem.setMimeType('video/mp2t')
-	#listitem.setProperty('mimetype', 'video/mp2t')
-	#listitem.setProperty('inputstream', 'inputstream.ffmpegdirect')
-	#listitem.setProperty('inputstream.ffmpegdirect.mime_type', 'video/mp2t')
+	listitem.setMimeType('video/mp2t')
+	listitem.setProperty('mimetype', 'video/mp2t')
+	listitem.setProperty('inputstream', 'inputstream.ffmpegdirect')
+	listitem.setProperty('inputstream.ffmpegdirect.mime_type', 'video/mp2t')
 	xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, listitem)
 #---------------------
 def ST(x="", o="w"):
@@ -122,7 +132,8 @@ if mode == 0:
 elif mode == 1:
 	PlayUrl(name, url)
 elif mode == 2:
-	StartDownload("https://s0.blogspotting.art/web-sources/download/8D841518CB161818/933789/file.mp4", "http://trailers.to")
+	StartDownload("https://s0.blogspotting.art/web-sources/download/D0821840F1CD04D1/933789/file.mp4", "http://trailers.to")
+	#StartDownload("http://cdn.netcine.biz/html/content/conteudolb4/walker/01leg/01-ALTO.mp4?token=htKgCi5A1dEGZFTUK1fHXQ&expires=1621223898&ip=189.5.231.128", "http://cdn.netcine.info")
 elif mode == 3:
 	StopDownload()
 
